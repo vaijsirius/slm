@@ -1,0 +1,72 @@
+
+######## OUR MODEL: V=10000, d_model=512, layers=4, heads=16, d_ff=1344, context=256
+-- parameters
+  token embedding (V x d)                               5,120,000  ( 22.6%)
+  attention q,k,v,o projections (4 d^2) x L             4,194,304  ( 18.5%)
+  FFN (3 matrices of d x d_ff) x L                      8,257,536  ( 36.4%)
+  RMSNorm weights (2 per layer + final)                     4,608  (  0.0%)
+  output projection (d x V)                             5,120,000  ( 22.6%)
+  TOTAL                                                22,696,448
+  embedding + output layers: 10,240,000 = 45.1% of the total (transformer layers incl. norms: 12,456,448)
+-- matmul FLOPs, one forward pass over T tokens (2mnp per m x n @ n x p), per layer then whole model
+  q,k,v,o projections (4 x 2*T*d*d)                per layer      536,870,912   x4:      2,147,483,648  ( 22.5%)
+  scores Q K^T (heads x 2*T*dh*T)                  per layer       67,108,864   x4:        268,435,456  (  2.8%)
+  weights x V (heads x 2*T*T*dh)                   per layer       67,108,864   x4:        268,435,456  (  2.8%)
+  FFN up-projections (w1[,w3]) (2*T*d*d_ff each)   per layer      704,643,072   x4:      2,818,572,288  ( 29.6%)
+  FFN down-projection w2 (2*T*d_ff*d)              per layer      352,321,536   x4:      1,409,286,144  ( 14.8%)
+  output projection (2*T*d*V)                                                  2,621,440,000  ( 27.5%)
+  TOTAL forward                                       9,533,652,992 = 9.53 GFLOPs;  forward+backward ~ 3x = 28.6 GFLOPs
+  share: attention projections 22.5%, attention scores+values 5.6%, feed-forward 44.3%, output projection 27.5%
+
+code check: sum(p.numel()) = 22,696,448  matches by-hand total: True
+  embedding       5,120,000
+  layers         12,455,936
+  final norm            512
+  lm_head         5,120,000
+  one block: 3,113,984
+torch FlopCounterMode forward total: 9,533,652,992  (by hand: 9,533,652,992)
+
+######## GPT-2-small-sized, SwiGLU d_ff=2048 (8/3 d): V=50257, d_model=768, layers=12, heads=12, d_ff=2048, context=1024
+-- parameters
+  token embedding (V x d)                              38,597,376  ( 23.8%)
+  attention q,k,v,o projections (4 d^2) x L            28,311,552  ( 17.5%)
+  FFN (3 matrices of d x d_ff) x L                     56,623,104  ( 34.9%)
+  RMSNorm weights (2 per layer + final)                    19,200  (  0.0%)
+  output projection (d x V)                            38,597,376  ( 23.8%)
+  TOTAL                                               162,148,608
+  embedding + output layers: 77,194,752 = 47.6% of the total (transformer layers incl. norms: 84,953,856)
+-- matmul FLOPs, one forward pass over T tokens (2mnp per m x n @ n x p), per layer then whole model
+  q,k,v,o projections (4 x 2*T*d*d)                per layer    4,831,838,208   x12:     57,982,058,496  ( 19.9%)
+  scores Q K^T (heads x 2*T*dh*T)                  per layer    1,610,612,736   x12:     19,327,352,832  (  6.6%)
+  weights x V (heads x 2*T*T*dh)                   per layer    1,610,612,736   x12:     19,327,352,832  (  6.6%)
+  FFN up-projections (w1[,w3]) (2*T*d*d_ff each)   per layer    6,442,450,944   x12:     77,309,411,328  ( 26.5%)
+  FFN down-projection w2 (2*T*d_ff*d)              per layer    3,221,225,472   x12:     38,654,705,664  ( 13.3%)
+  output projection (2*T*d*V)                                                 79,047,426,048  ( 27.1%)
+  TOTAL forward                                     291,648,307,200 = 291.65 GFLOPs;  forward+backward ~ 3x = 874.9 GFLOPs
+  share: attention projections 19.9%, attention scores+values 13.3%, feed-forward 39.8%, output projection 27.1%
+
+######## GPT-2 small as published (GELU MLP, 2 matrices, d_ff=3072=4d; untied head): V=50257, d_model=768, layers=12, heads=12, d_ff=3072, context=1024
+-- parameters
+  token embedding (V x d)                              38,597,376  ( 23.8%)
+  attention q,k,v,o projections (4 d^2) x L            28,311,552  ( 17.5%)
+  FFN (2 matrices of d x d_ff) x L                     56,623,104  ( 34.9%)
+  RMSNorm weights (2 per layer + final)                    19,200  (  0.0%)
+  output projection (d x V)                            38,597,376  ( 23.8%)
+  TOTAL                                               162,148,608
+  embedding + output layers: 77,194,752 = 47.6% of the total (transformer layers incl. norms: 84,953,856)
+-- matmul FLOPs, one forward pass over T tokens (2mnp per m x n @ n x p), per layer then whole model
+  q,k,v,o projections (4 x 2*T*d*d)                per layer    4,831,838,208   x12:     57,982,058,496  ( 19.9%)
+  scores Q K^T (heads x 2*T*dh*T)                  per layer    1,610,612,736   x12:     19,327,352,832  (  6.6%)
+  weights x V (heads x 2*T*T*dh)                   per layer    1,610,612,736   x12:     19,327,352,832  (  6.6%)
+  FFN up-projections (w1[,w3]) (2*T*d*d_ff each)   per layer    4,831,838,208   x12:     57,982,058,496  ( 19.9%)
+  FFN down-projection w2 (2*T*d_ff*d)              per layer    4,831,838,208   x12:     57,982,058,496  ( 19.9%)
+  output projection (2*T*d*V)                                                 79,047,426,048  ( 27.1%)
+  TOTAL forward                                     291,648,307,200 = 291.65 GFLOPs;  forward+backward ~ 3x = 874.9 GFLOPs
+  share: attention projections 19.9%, attention scores+values 13.3%, feed-forward 39.8%, output projection 27.1%
+
+######## Q8: fp32 memory for our model
+parameters : 22,696,448 x 4 B = 90.8 MB
+gradients  : 22,696,448 x 4 B = 90.8 MB
+AdamW m    : 90.8 MB   AdamW v: 90.8 MB   -> state = 181.6 MB
+total      : 363.1 MB (346.3 MiB) = 16 bytes per parameter
+measured: optimizer state tensors hold 45,392,896 elements = 2.00 x #params (181.6 MB); gradients 22,696,448

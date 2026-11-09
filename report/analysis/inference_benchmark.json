@@ -1,0 +1,28 @@
+{
+  "machine": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.15.0+cpu",
+  "threads": 8,
+  "prompt_tokens": 4,
+  "new_tokens": 256,
+  "kv_cache": {
+    "seconds": [
+      1.6393577000126243,
+      1.6784954000031576,
+      1.9868219998897985
+    ],
+    "best_tokens_per_second": 156.1587199657699
+  },
+  "no_cache": {
+    "seconds": [
+      5.700037300004624,
+      6.638319399906322,
+      7.041767199989408
+    ],
+    "best_tokens_per_second": 44.911986803979744
+  },
+  "token_passes_no_cache": 33658,
+  "token_passes_with_cache": 1024,
+  "fraction_of_token_work_repeated": 0.9695763265791194,
+  "measured_speedup": 3.476994252054161
+}

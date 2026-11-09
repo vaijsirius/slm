@@ -1,0 +1,65 @@
+{
+  "stories_sampled": 10,
+  "per_story": [
+    {
+      "bytes": 411,
+      "tokens": 105,
+      "bytes_per_token": 3.914
+    },
+    {
+      "bytes": 614,
+      "tokens": 144,
+      "bytes_per_token": 4.264
+    },
+    {
+      "bytes": 721,
+      "tokens": 177,
+      "bytes_per_token": 4.073
+    },
+    {
+      "bytes": 702,
+      "tokens": 165,
+      "bytes_per_token": 4.255
+    },
+    {
+      "bytes": 775,
+      "tokens": 183,
+      "bytes_per_token": 4.235
+    },
+    {
+      "bytes": 621,
+      "tokens": 154,
+      "bytes_per_token": 4.032
+    },
+    {
+      "bytes": 842,
+      "tokens": 216,
+      "bytes_per_token": 3.898
+    },
+    {
+      "bytes": 977,
+      "tokens": 202,
+      "bytes_per_token": 4.837
+    },
+    {
+      "bytes": 1221,
+      "tokens": 319,
+      "bytes_per_token": 3.828
+    },
+    {
+      "bytes": 726,
+      "tokens": 174,
+      "bytes_per_token": 4.172
+    }
+  ],
+  "mean_of_ratios": 4.151,
+  "pooled_bytes_per_token": 4.138,
+  "file_bytes": 22502601,
+  "file_tokens": 5465883,
+  "encode_seconds": 8.2,
+  "bytes_per_second": 2743342,
+  "tokens_per_second": 666358,
+  "whole_file_bytes_per_token": 4.117,
+  "iterable_seconds": 15.23,
+  "iterable_matches_encode": true
+}

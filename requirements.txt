@@ -1,0 +1,5 @@
+# Only what is needed to run inference.py (generation from release/) on a CPU
+torch>=2.4
+regex
+einops
+numpy

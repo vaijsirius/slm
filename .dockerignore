@@ -1,0 +1,11 @@
+runs/
+data/
+artifacts/
+logs/
+tests/
+report/
+scripts/
+notebooks/
+__pycache__/
+*.npy
+.git

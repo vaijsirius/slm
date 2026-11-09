@@ -1,0 +1,9 @@
+{
+  "steps": 300,
+  "n_params": 22696448,
+  "final_train_loss": 2.768625236058142e-05,
+  "elapsed_s": 462.20125246047974,
+  "lr": 0.001,
+  "precision": "fp32",
+  "device": "cpu"
+}

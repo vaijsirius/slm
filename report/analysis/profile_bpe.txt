@@ -1,0 +1,43 @@
+train_bpe total: 6.5s
+  count_pretokens               5.51s  ( 84.9% of train_bpe)
+  count_pretokens_in_text       5.46s  ( 84.2% of train_bpe)
+  merge_loop                    0.96s  ( 14.9% of train_bpe)
+  _merge_word                   0.17s  (  2.7% of train_bpe)
+         12986172 function calls (12986058 primitive calls) in 6.490 seconds
+
+   Ordered by: cumulative time
+   List reduced from 194 to 12 due to restriction <12>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.013    0.013    6.490    6.490 bpe.py:205(train_bpe)
+        1    0.002    0.002    5.513    5.513 bpe.py:93(count_pretokens)
+        1    0.029    0.029    5.463    5.463 bpe.py:47(count_pretokens_in_text)
+    27633    0.015    0.000    5.313    0.000 __init__.py:669(update)
+    27631    1.096    0.000    5.269    0.000 {built-in method _collections._count_elements}
+  5446632    3.467    0.000    4.173    0.000 bpe.py:52(<genexpr>)
+        1    0.457    0.457    0.964    0.964 bpe.py:148(merge_loop)
+  5419001    0.706    0.000    0.706    0.000 {method 'group' of '_regex.Match' objects}
+   110510    0.118    0.000    0.173    0.000 bpe.py:136(_merge_word)
+    29542    0.083    0.000    0.167    0.000 {built-in method _heapq.heappop}
+   508094    0.102    0.000    0.102    0.000 bpe.py:132(__lt__)
+        1    0.000    0.000    0.079    0.079 bpe.py:38(split_on_special_tokens)
+
+
+
+         12986172 function calls (12986058 primitive calls) in 6.490 seconds
+
+   Ordered by: internal time
+   List reduced from 194 to 8 due to restriction <8>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+  5446632    3.467    0.000    4.173    0.000 bpe.py:52(<genexpr>)
+    27631    1.096    0.000    5.269    0.000 {built-in method _collections._count_elements}
+  5419001    0.706    0.000    0.706    0.000 {method 'group' of '_regex.Match' objects}
+        1    0.457    0.457    0.964    0.964 bpe.py:148(merge_loop)
+   110510    0.118    0.000    0.173    0.000 bpe.py:136(_merge_word)
+   508094    0.102    0.000    0.102    0.000 bpe.py:132(__lt__)
+    29542    0.083    0.000    0.167    0.000 {built-in method _heapq.heappop}
+        1    0.079    0.079    0.079    0.079 {method 'split' of '_regex.Pattern' objects}
+
+
+

@@ -1,0 +1,6 @@
+# Everything for training, tests, analysis and plots
+-r requirements.txt
+pytest
+matplotlib
+psutil
+tqdm

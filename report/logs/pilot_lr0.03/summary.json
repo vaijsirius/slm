@@ -1,0 +1,12 @@
+{
+  "steps": 100,
+  "n_params": 22696448,
+  "final_train_loss": 5.142664432525635,
+  "elapsed_s": 741.9302039146423,
+  "lr": 0.03,
+  "precision": "fp32",
+  "device": "cpu",
+  "final_val_loss": 5.178900301456451,
+  "final_val_ppl": 177.4875208647174,
+  "val_tokens": 32768
+}

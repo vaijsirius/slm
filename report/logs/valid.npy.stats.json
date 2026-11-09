@@ -1,0 +1,11 @@
+{
+  "input": "C:/slm_work/data/TinyStoriesV2-GPT4-valid.txt",
+  "bytes": 22502601,
+  "tokens": 5465883,
+  "seconds": 4.8,
+  "bytes_per_second": 4717648,
+  "num_processes": 8,
+  "bytes_per_token": 4.1169,
+  "max_id": 9999,
+  "dtype": "uint16"
+}

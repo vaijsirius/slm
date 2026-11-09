@@ -1,0 +1,15 @@
+{
+  "input": "C:/slm_work/data/TinyStoriesV2-GPT4-train.txt",
+  "max_bytes": null,
+  "vocab_size": 10000,
+  "num_merges": 9743,
+  "pretokenize_seconds": 200.8,
+  "merge_seconds": 4.5,
+  "total_seconds": 205.4,
+  "peak_total_rss_mb": 1435.0,
+  "num_processes": 8,
+  "distinct_pretokens": 59933,
+  "longest_token_id": 7160,
+  "longest_token_bytes": 15,
+  "longest_token": " accomplishment"
+}

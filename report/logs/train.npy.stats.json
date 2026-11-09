@@ -1,0 +1,11 @@
+{
+  "input": "C:/slm_work/data/TinyStoriesV2-GPT4-train.txt",
+  "bytes": 2227753162,
+  "tokens": 541229347,
+  "seconds": 237.8,
+  "bytes_per_second": 9369498,
+  "num_processes": 8,
+  "bytes_per_token": 4.1161,
+  "max_id": 9999,
+  "dtype": "uint16"
+}
